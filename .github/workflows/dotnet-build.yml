@@ -1,0 +1,27 @@
+name: .NET Build
+
+on:
+	push: {}
+	schedule:
+		- cron: '0 * * * *' # executa a cada hora, no minuto 0
+
+jobs:
+	build:
+		name: Build and Test
+		runs-on: ubuntu-latest
+		defaults:
+			run:
+				working-directory: github4women
+		steps:
+			- name: Checkout repository
+				uses: actions/checkout@v4
+
+			- name: Setup .NET
+				uses: actions/setup-dotnet@v3
+				with:
+					dotnet-version: '8.0.x'
+
+			- name: Restore
+			- name: Run CI script
+				run: bash .github/scripts/ci.sh
+
